@@ -10,9 +10,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /aqua-web-app
+RUN go build -o /aqua-webapp
 
 EXPOSE 8080
 
-CMD [ "/aqua-web-app" ]
-
+CMD [ "/aqua-webapp"]
