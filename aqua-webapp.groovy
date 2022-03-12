@@ -29,9 +29,7 @@ pipeline {
         stage('Deploy and Verify Image') {
             steps{
                 script {
-                    sh "docker image tag $DOCKER_HUB_REPO:$BUILD_NUMBER $DOCKER_HUB_REPO:latest"
                     sh "docker run -d -p $CONPORT:$CONPORT --name $CONTNAME $DOCKER_HUB_REPO:$BUILD_NUMBER"
-                    
                     CONTIP = sh( script: "docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTNAME",
                                     returnStdout: true).trim()
                     sh '''curl -s http://'''+CONTIP+''':$CONPORT'''
